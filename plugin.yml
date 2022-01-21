@@ -1,0 +1,5 @@
+name: BBLifeCore
+author: BBLifeDevelopmentTeam
+api: 4.0.0
+main: bblife\core\BBLifeCorePlugin
+version: 1.0.0

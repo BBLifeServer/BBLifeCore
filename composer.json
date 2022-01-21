@@ -1,0 +1,9 @@
+{
+    "name": "bblife/bblife_core",
+    "description": "Core plugin for BBLifeServer",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "require": {
+        "pocketmine/pocketmine-mp": "4.*"
+    }
+}
