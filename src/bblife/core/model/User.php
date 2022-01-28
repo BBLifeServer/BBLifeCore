@@ -6,6 +6,8 @@ use InvalidArgumentException;
 
 class User {
 
+    public const DEFAULT_MONEY = 1000;
+
     private string $name;
 
     private int $money;
@@ -17,6 +19,10 @@ class User {
     public function __construct(string $name, int $money) {
         $this->name = $name;
         $this->money = $money;
+    }
+
+    public static function createDefault(string $name): User {
+        return new User($name, self::DEFAULT_MONEY);
     }
 
     /**
