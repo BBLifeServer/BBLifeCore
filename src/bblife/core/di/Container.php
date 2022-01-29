@@ -11,28 +11,31 @@ class Container {
      * @template T
      * @var array<class-string<T>, T>
      */
-    private array $loadedClasses = [];
+    private static array $loadedClasses = [];
 
     /**
      * @template T
      * @var array<class-string<T>, class-string<T>>
      */
-    private array $definedClasses = [];
+    private static array $definedClasses = [];
+
+    private function __construct() {
+    }
 
     /**
      * @template T
      * @param class-string<T> $class
      * @return T
      */
-    public function get(string $class) {
-        if (array_key_exists($class, $this->definedClasses)) {
-            return $this->get($this->definedClasses[$class]);
+    public static function get(string $class) {
+        if (array_key_exists($class, self::$definedClasses)) {
+            return self::get(self::$definedClasses[$class]);
         }
         if (!class_exists($class)) {
             throw new InvalidArgumentException("Key must be valid class name");
         }
-        if (array_key_exists($class, $this->loadedClasses)) {
-            return $this->loadedClasses[$class];
+        if (array_key_exists($class, self::$loadedClasses)) {
+            return self::$loadedClasses[$class];
         }
         $constructor = (new ReflectionClass($class))->getConstructor();
         if ($constructor === null) {
@@ -40,10 +43,10 @@ class Container {
         }
         $args = [];
         foreach ($constructor->getParameters() as $parameter) {
-            $args[] = $this->get($parameter->getType()->getName());
+            $args[] = self::get($parameter->getType()->getName());
         }
         $object = new $class(...$args);
-        $this->loadedClasses[$class] = $object;
+        self::$loadedClasses[$class] = $object;
         return $object;
     }
 
@@ -51,10 +54,9 @@ class Container {
      * @template T
      * @param class-string<T> $base
      * @param class-string<T> $class
-     * @return Container
+     * @return void
      */
-    public function define(string $base, string $class): static {
-        $this->definedClasses[$base] = $class;
-        return $this;
+    public static function define(string $base, string $class): void {
+        self::$definedClasses[$base] = $class;
     }
 }

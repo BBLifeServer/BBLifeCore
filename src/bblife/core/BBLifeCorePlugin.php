@@ -10,14 +10,11 @@ use pocketmine\plugin\PluginBase;
 
 class BBLifeCorePlugin extends PluginBase {
 
-    private Container $container;
-
     protected function onLoad(): void {
-        $this->container = (new Container())
-            ->define(UserRepository::class, ButlerUserRepository::class);
+        Container::define(UserRepository::class, ButlerUserRepository::class);
     }
 
     protected function onEnable(): void {
-        $this->getServer()->getPluginManager()->registerEvents($this->container->get(CommonListener::class), $this);
+        $this->getServer()->getPluginManager()->registerEvents(Container::get(CommonListener::class), $this);
     }
 }
