@@ -18,6 +18,7 @@ jobs:
     - name: build
       run: |
         wget https://poggit.pmmp.io/r/149344/PocketMine-DevTools.phar -O DevTools.phar
+        mkdir build
         php -d phar.readonly=0 DevTools.phar --make ./ --out ./build/BBLifeCore.phar
         
     - name: deploy
