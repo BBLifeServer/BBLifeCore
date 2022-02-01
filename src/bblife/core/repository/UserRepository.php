@@ -6,7 +6,10 @@ use bblife\core\model\User;
 
 interface UserRepository extends Repository {
 
-    public function create(User $user): void;
+    /**
+     * @param User $user
+     */
+    public function save(User $user): void;
 
     /**
      * @param string $name Player name
@@ -18,8 +21,6 @@ interface UserRepository extends Repository {
      * @return User[]
      */
     public function getAll(): array;
-
-    public function update(User $user): void;
 
     public function fetch(User $user): void;
 
