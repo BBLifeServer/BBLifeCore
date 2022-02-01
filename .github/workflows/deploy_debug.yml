@@ -3,10 +3,10 @@ name: deploy debug
 on:
   push:
     branches: 
-    - development
+    - develop
   pull_request:
     branches: 
-    - development
+    - develop
   workflow_dispatch:
 
 jobs:
