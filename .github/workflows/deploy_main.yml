@@ -18,7 +18,7 @@ jobs:
     - name: build
       run: |
         wget https://poggit.pmmp.io/r/149344/PocketMine-DevTools.phar -O DevTools.phar
-        php -d phar.readonly=0 Devtools.phar --make ./ --out ./build/BBLifeCore.phar
+        php -d phar.readonly=0 DevTools.phar --make ./ --out ./build/BBLifeCore.phar
         
     - name: deploy
       uses: sand4rt/ftp-deployer@v1.3
