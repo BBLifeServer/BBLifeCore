@@ -22,8 +22,6 @@ interface UserRepository extends Repository {
      */
     public function getAll(): array;
 
-    public function fetch(User $user): void;
-
     /**
      * @param string $name Player name
      * @return bool
