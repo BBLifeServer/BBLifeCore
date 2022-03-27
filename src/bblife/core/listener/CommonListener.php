@@ -6,6 +6,7 @@ use bblife\core\service\UserService;
 use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityExplodeEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerDeathEvent;
@@ -50,5 +51,9 @@ class CommonListener implements Listener {
                     break;    
             }
         }
+    }
+
+    public function onExplode(EntityExplodeEvent $event){
+        $event->cancel();
     }
 }
