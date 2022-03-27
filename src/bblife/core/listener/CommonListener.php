@@ -5,6 +5,7 @@ namespace bblife\core\listener;
 use bblife\core\service\UserService;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerDeathEvent;
 
 class CommonListener implements Listener {
 
@@ -27,5 +28,9 @@ class CommonListener implements Listener {
         if (!$this->userService->existsUser($player->getName())) {
             $this->userService->createUser($player->getName());
         }
+    }
+
+    public function ondeath(PlayerDeathEvent $event) {
+        $event->setKeepInventory(true);
     }
 }
