@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace bblife\core\model\status;
 
 class Status {
-	protected STRStatus $str;
-	protected VITStatus $vit;
-	protected INTStatus $int;
-	protected DEXStatus $dex;
-	protected LUKStatus $luk;
+	protected IStatusProp $str;
+	protected IStatusProp $vit;
+	protected IStatusProp $int;
+	protected IStatusProp $dex;
+	protected IStatusProp $luk;
 
 
 }
