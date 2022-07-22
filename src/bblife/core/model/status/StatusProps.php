@@ -7,6 +7,7 @@ class StatusProps implements IStatusProp {
 	protected int $value;
 
 	public function __construct(int $value) {
+		$this->validate($value);
 		$this->setValue($value);
 	}
 
@@ -16,8 +17,7 @@ class StatusProps implements IStatusProp {
 	 * @throw \LogicException
 	 */
 	public function setValue(int $value): void {
-		$this->value = $value;
-		$this->validate();
+		$this->validate($this->cast($value));
 	}
 
 	public function getValue(): int {
@@ -25,12 +25,23 @@ class StatusProps implements IStatusProp {
 	}
 
 	/**
+	 * @param int $value
 	 * @return void
 	 * @throw \LogicException
 	 */
-	protected function validate(): void {
-		if($this->value < 0x0 or $this->value > 0xff){
-			throw new \LogicException('status value must be between 0 and 256');
+	protected function validate(int $value): void {
+		if($value < 0x1 or $value > 0xff){
+			throw new \LogicException('status value must be between 0 and 255');
 		}
+	}
+
+	protected function cast(int $value): int {
+		if($value < -0x1) {
+			$value = 0;
+
+		} elseif ($value > 0xff) {
+			$value = 0xfd;
+		}
+		return $value;
 	}
 }
