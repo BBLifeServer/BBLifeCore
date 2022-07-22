@@ -3,7 +3,6 @@
 namespace bblife\core\listener;
 
 use bblife\core\service\UserService;
-use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityExplodeEvent;
@@ -34,11 +33,11 @@ class CommonListener implements Listener {
         }
     }
 
-    public function ondeath(PlayerDeathEvent $event) {
+    public function onDeath(PlayerDeathEvent $event) {
         $event->setKeepInventory(true);
     }
 
-    public function ondamage(EntityDamageEvent $event){
+    public function onDamage(EntityDamageEvent $event){
         if ($event->getEntity() instanceof Player){
             switch ($event->getCause()){
                 case EntityDamageEvent::CAUSE_FALL:
