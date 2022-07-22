@@ -2,15 +2,27 @@
 declare(strict_types=1);
 
 namespace bblife\core\model\status;
-/**
- * このクラスの計算関数は全てイミュータブルです
- */
+
 class Status {
 	protected IStatusProp $str;
 	protected IStatusProp $vit;
 	protected IStatusProp $int;
 	protected IStatusProp $dex;
 	protected IStatusProp $luk;
+
+	public function __construct(
+		IStatusProp $str,
+		IStatusProp $vit,
+		IStatusProp $int,
+		IStatusProp $dex,
+		IStatusProp $luk
+	) {
+		$this->str = $str;
+		$this->vit = $vit;
+		$this->int = $int;
+		$this->dex = $dex;
+		$this->luk = $luk;
+	}
 
 	/**
 	 * @return IStatusProp
@@ -49,41 +61,41 @@ class Status {
 
 	public function add(self $operand): self {
 		$status = clone $this;
-		$status->getStr()->setValue($status->getStr()->getValue() + $operand->getStr()->getValue());
-		$status->getVit()->setValue($status->getVit()->getValue() + $operand->getVit()->getValue());
-		$status->getInt()->setValue($status->getInt()->getValue() + $operand->getInt()->getValue());
-		$status->getDex()->setValue($status->getDex()->getValue() + $operand->getDex()->getValue());
-		$status->getLuk()->setValue($status->getLuk()->getValue() + $operand->getLuk()->getValue());
+		$status->getStr()->add($operand->getStr());
+		$status->getVit()->add($operand->getVit());
+		$status->getInt()->add($operand->getInt());
+		$status->getDex()->add($operand->getDex());
+		$status->getLuk()->add($operand->getLuk());
 		return $status;
 	}
 
 	public function subtract(self $operand): self {
 		$status = clone $this;
-		$status->getStr()->setValue($status->getStr()->getValue() - $operand->getStr()->getValue());
-		$status->getVit()->setValue($status->getVit()->getValue() - $operand->getVit()->getValue());
-		$status->getInt()->setValue($status->getInt()->getValue() - $operand->getInt()->getValue());
-		$status->getDex()->setValue($status->getDex()->getValue() - $operand->getDex()->getValue());
-		$status->getLuk()->setValue($status->getLuk()->getValue() - $operand->getLuk()->getValue());
+		$status->getStr()->subtract($operand->getStr());
+		$status->getVit()->subtract($operand->getVit());
+		$status->getInt()->subtract($operand->getInt());
+		$status->getDex()->subtract($operand->getDex());
+		$status->getLuk()->subtract($operand->getLuk());
 		return $status;
 	}
 
 	public function multiply(self $operand): self {
 		$status = clone $this;
-		$status->getStr()->setValue($status->getStr()->getValue() * $operand->getStr()->getValue());
-		$status->getVit()->setValue($status->getVit()->getValue() * $operand->getVit()->getValue());
-		$status->getInt()->setValue($status->getInt()->getValue() * $operand->getInt()->getValue());
-		$status->getDex()->setValue($status->getDex()->getValue() * $operand->getDex()->getValue());
-		$status->getLuk()->setValue($status->getLuk()->getValue() * $operand->getLuk()->getValue());
+		$status->getStr()->multiply($operand->getStr());
+		$status->getVit()->multiply($operand->getVit());
+		$status->getInt()->multiply($operand->getInt());
+		$status->getDex()->multiply($operand->getDex());
+		$status->getLuk()->multiply($operand->getLuk());
 		return $status;
 	}
 
 	public function divide(self $operand): self {
 		$status = clone $this;
-		$status->getStr()->setValue($status->getStr()->getValue() / $operand->getStr()->getValue());
-		$status->getVit()->setValue($status->getVit()->getValue() / $operand->getVit()->getValue());
-		$status->getInt()->setValue($status->getInt()->getValue() / $operand->getInt()->getValue());
-		$status->getDex()->setValue($status->getDex()->getValue() / $operand->getDex()->getValue());
-		$status->getLuk()->setValue($status->getLuk()->getValue() / $operand->getLuk()->getValue());
+		$status->getStr()->divide($operand->getStr());
+		$status->getVit()->divide($operand->getVit());
+		$status->getInt()->divide($operand->getInt());
+		$status->getDex()->divide($operand->getDex());
+		$status->getLuk()->divide($operand->getLuk());
 		return $status;
 	}
 }

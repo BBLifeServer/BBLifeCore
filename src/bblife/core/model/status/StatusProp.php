@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace bblife\core\model\status;
 
-class StatusProps implements IStatusProp {
+class StatusProp implements IStatusProp {
 	protected int $value;
 
 	public function __construct(int $value) {
@@ -23,6 +23,27 @@ class StatusProps implements IStatusProp {
 	public function getValue(): int {
 		return $this->value;
 	}
+
+	public function add(IStatusProp $operand): self {
+		$this->setValue($this->getValue() + $operand->getValue());
+		return $this;
+	}
+
+	public function subtract(IStatusProp $operand): self {
+		$this->setValue($this->getValue() - $operand->getValue());
+		return $this;
+	}
+
+	public function multiply(IStatusProp $operand): self {
+		$this->setValue($this->getValue() * $operand->getValue());
+		return $this;
+	}
+
+	public function divide(IStatusProp $operand): self {
+		$this->setValue($this->getValue() / $operand->getValue());
+		return $this;
+	}
+
 
 	/**
 	 * @param int $value
