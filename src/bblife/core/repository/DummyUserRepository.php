@@ -2,42 +2,60 @@
 
 namespace bblife\core\repository;
 
+use bblife\core\BBLifeCorePlugin;
 use bblife\core\model\User;
+use pocketmine\utils\Config;
 
 class DummyUserRepository implements UserRepository {
 
-    /** @var User[] */
-    private array $users;
+    private Config $config;
 
     public function __construct(){
-        $this->users = [];
+        $this->config = new Config(BBLifeCorePlugin::getDataPath() . "UserData.json", Config::JSON);
     }
 
     public function close(){
+        $this->config->save();
     }
 
     public function save(User $user): void{
-        $this->users[$user->getName()] = clone $user;
+        $this->config->set($user->getName(), $this->convertUserIntoArray($user));
     }
 
     /**
      * @inheritDoc
      */
     public function get(string $name): User{
-        return $this->users[$name];
+        return $this->convertArrayIntoUser($name, $this->config->get($name));
     }
 
     /**
      * @inheritDoc
      */
     public function getAll(): array{
-        return array_map(fn(User $user) => clone $user, $this->users);
+        $users = [];
+        foreach ($this->config->getAll() as $name => $data) {
+            $users[] = $this->convertArrayIntoUser($name, $data);
+        }
+        return $users;
     }
 
     /**
      * @inheritDoc
      */
     public function exists(string $name): bool{
-        return isset($this->users[$name]);
+        return $this->config->exists($name);
+    }
+
+    private function convertUserIntoArray(User $user): array {
+        return [
+            "money" => $user->getMoney(),
+        ];
+    }
+
+    private function convertArrayIntoUser(string $name, array $data): User {
+        $user = User::createDefault($name);
+        $user->setMoney($data["money"]);
+        return $user;
     }
 }
