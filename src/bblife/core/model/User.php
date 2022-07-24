@@ -15,10 +15,11 @@ class User {
 
 	private Status $status;
 
-    /**
-     * @param string $name
-     * @param int $money
-     */
+	/**
+	 * @param string $name
+	 * @param int $money
+	 * @param Status $status
+	 */
     public function __construct(string $name, int $money, Status $status) {
         $this->name = $name;
         $this->money = $money;
