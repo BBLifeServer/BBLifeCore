@@ -24,6 +24,16 @@ class Status {
 		$this->luk = $luk;
 	}
 
+	public static function default(): static {
+		return new static(
+			str: new StatusProp(1),
+			vit: new StatusProp(1),
+			int: new StatusProp(1),
+			dex: new StatusProp(1),
+			luk: new StatusProp(1)
+		);
+	}
+
 	/**
 	 * @return IStatusProp
 	 */
@@ -59,7 +69,38 @@ class Status {
 		return $this->luk;
 	}
 
-	public function add(self $operand): self {
+	public function add(self $operand): void {
+		$this->getStr()->add($operand->getStr());
+		$this->getVit()->add($operand->getVit());
+		$this->getInt()->add($operand->getInt());
+		$this->getDex()->add($operand->getDex());
+		$this->getLuk()->add($operand->getLuk());
+	}
+
+	public function subtract(self $operand): void {
+		$this->getStr()->subtract($operand->getStr());
+		$this->getVit()->subtract($operand->getVit());
+		$this->getDex()->subtract($operand->getDex());
+		$this->getLuk()->subtract($operand->getLuk());
+	}
+
+	public function multiply(self $operand): void {
+		$this->getStr()->multiply($operand->getStr());
+		$this->getVit()->multiply($operand->getVit());
+		$this->getInt()->multiply($operand->getInt());
+		$this->getDex()->multiply($operand->getDex());
+		$this->getLuk()->multiply($operand->getLuk());
+	}
+
+	public function divide(self $operand): void {
+		$this->getStr()->divide($operand->getStr());
+		$this->getVit()->divide($operand->getVit());
+		$this->getInt()->divide($operand->getInt());
+		$this->getDex()->divide($operand->getDex());
+		$this->getLuk()->divide($operand->getLuk());
+	}
+
+	public function addImutable(self $operand): self {
 		$status = clone $this;
 		$status->getStr()->add($operand->getStr());
 		$status->getVit()->add($operand->getVit());
@@ -69,7 +110,7 @@ class Status {
 		return $status;
 	}
 
-	public function subtract(self $operand): self {
+	public function subtractImutable(self $operand): self {
 		$status = clone $this;
 		$status->getStr()->subtract($operand->getStr());
 		$status->getVit()->subtract($operand->getVit());
@@ -79,7 +120,7 @@ class Status {
 		return $status;
 	}
 
-	public function multiply(self $operand): self {
+	public function multiplyImutable(self $operand): self {
 		$status = clone $this;
 		$status->getStr()->multiply($operand->getStr());
 		$status->getVit()->multiply($operand->getVit());
@@ -89,7 +130,7 @@ class Status {
 		return $status;
 	}
 
-	public function divide(self $operand): self {
+	public function divideImutable(self $operand): self {
 		$status = clone $this;
 		$status->getStr()->divide($operand->getStr());
 		$status->getVit()->divide($operand->getVit());

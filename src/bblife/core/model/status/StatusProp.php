@@ -51,13 +51,13 @@ class StatusProp implements IStatusProp {
 	 * @throw \LogicException
 	 */
 	protected function validate(int $value): void {
-		if($value < 0x1 or $value > 0xff){
-			throw new \LogicException('status value must be between 0 and 255');
+		if($value < 0x0 or $value > 0xff){
+			throw new \LogicException('status value must be between 1 and 255');
 		}
 	}
 
 	protected function cast(int $value): int {
-		if($value < -0x1) {
+		if($value < 0x0) {
 			$value = 0;
 
 		} elseif ($value > 0xff) {
