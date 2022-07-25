@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace bblife\core\model\item;
 
 
-interface IItem {
+interface IStrageContent {
 	public function getName(): string;
 	public function getDescription(): string;
 	public function getId(): int;
