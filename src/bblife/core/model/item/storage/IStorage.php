@@ -19,13 +19,21 @@ interface IStorage {
 	 */
 	public function remove(IStorageContent ...$contents): StorageResult;
 
-	public function getMaxSize(): int;
-
 	/**
 	 * @param IStorageContent ...$contents
 	 * @return StorageResult StorageResult is IStorageContent of not exists in storage. if success, dumps is empty and result is true.
 	 */
 	public function has(IStorageContent ...$contents): StorageResult;
+
+	/**
+	 * @return StorageResult result is always true. dumps is all contents of storage.
+	 */
+	public function getAll(): StorageResult;
+
+	/**
+	 * @return int|null if null, max size is unlimited. else max size is returned value.
+	 */
+	public function getMaxSize(): ?int;
 
 	public static function fromArray(IStorageContent ...$contents): static;
 }
