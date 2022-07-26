@@ -9,5 +9,6 @@ interface IStorageContent {
 	public function getId(): int;
 	public function getAmount(): int;
 	public function getMaxStackSize(): int;
-	public function trim(int $amount): static;
+	public function equals(IStorageContent $content): bool;
+	public function trim(int $amount): ?static;
 }
