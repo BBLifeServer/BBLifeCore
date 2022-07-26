@@ -2,6 +2,7 @@
 
 namespace bblife\core\model;
 
+use bblife\core\model\item\storage\UserStorage;
 use InvalidArgumentException;
 
 class User {
@@ -12,17 +13,21 @@ class User {
 
     private int $money;
 
-    /**
-     * @param string $name
-     * @param int $money
-     */
-    public function __construct(string $name, int $money) {
+	private UserStorage $storage;
+
+	/**
+	 * @param string $name
+	 * @param int $money
+	 * @param UserStorage $storage
+	 */
+    public function __construct(string $name, int $money, UserStorage $storage) {
         $this->name = $name;
         $this->money = $money;
+		$this->storage = $storage;
     }
 
     public static function createDefault(string $name): User {
-        return new User($name, self::DEFAULT_MONEY);
+        return new User($name, self::DEFAULT_MONEY, UserStorage::fromContents());
     }
 
     /**
@@ -48,4 +53,12 @@ class User {
         }
         $this->money = $money;
     }
+
+	public function getStorage(): UserStorage {
+		return $this->storage;
+	}
+
+	public function setStorage(UserStorage $storage): void {
+		$this->storage = $storage;
+	}
 }

@@ -35,5 +35,5 @@ interface IStorage {
 	 */
 	public function getMaxSize(): ?int;
 
-	public static function fromArray(IStorageContent ...$contents): static;
+	public static function fromContents(IStorageContent ...$contents): static;
 }
