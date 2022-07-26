@@ -5,6 +5,6 @@ namespace bblife\core\model\item;
 
 use pocketmine\item\Item;
 
-interface IFood {
+interface ISubstancable {
 	public function getPMItem(): Item;
 }
